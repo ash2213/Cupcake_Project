@@ -28,7 +28,7 @@ public class Main {
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> CustomerController.login(ctx, connectionPool));
         app.get("/register",ctx -> ctx.render("register.html"));
-        app.post("/register",ctx -> CustomerController.createUser(ctx,connectionPool));
+        app.post("/register",ctx -> CustomerController.createCustomer(ctx,connectionPool));
         app.get("/shopping", ctx -> CartController.showItemSelection(ctx, connectionPool));
         app.post("/shopping", ctx -> CartController.addItemToCart(ctx, connectionPool));
         app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));

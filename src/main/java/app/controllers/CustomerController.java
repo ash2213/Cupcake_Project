@@ -15,7 +15,7 @@ public class CustomerController {
         try {
             Customer customer = CustomerMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", customer);
-            ctx.render("shopping.html");
+            ctx.redirect("/shopping");
 
         } catch (DatabaseException e) {
 
@@ -26,7 +26,7 @@ public class CustomerController {
 
     }
 
-    public static void createUser(Context ctx, ConnectionPool connectionPool) {
+    public static void createCustomer(Context ctx, ConnectionPool connectionPool) {
 
         String email = ctx.formParam("username");
         String password1 = ctx.formParam("password1");

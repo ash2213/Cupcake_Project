@@ -53,12 +53,12 @@ public class CartController {
             ctx.sessionAttribute("bases", bases);
             ctx.sessionAttribute("toppings", toppings);
 
-            ctx.render("/shopping");
+            ctx.render("shopping.html");
 
         } catch (DatabaseException e) {
 
             ctx.attribute("message", "Failed to load item available flavors");
-            ctx.render("/shopping");
+            ctx.render("shopping.html");
         }
     }
 
@@ -80,5 +80,4 @@ public class CartController {
 
         ctx.render("cart.html");
     }
-
 }
