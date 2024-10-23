@@ -40,7 +40,7 @@ public class CustomerController {
 
             try {
                 CustomerMapper.createUser(email, password1, connectionPool);
-                ctx.attribute("message", "Du er nu oprettet. Log på for at kommme i gang.");
+                ctx.attribute("message", "You have successfully created a new customer");
                 ctx.render("index.html");
             } catch (DatabaseException e) {
 
@@ -49,7 +49,7 @@ public class CustomerController {
 
             }
         }else{
-            ctx.attribute("message", "Dine passwords matcher ikke!");
+            ctx.attribute("message", "Passwords do not match");
             ctx.render("register.html");
         }
 

@@ -1,7 +1,7 @@
 package app.persistence;
 
 import app.entities.Topping;
-import app.expections.DatabaseException;
+import app.exceptions.DatabaseException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
