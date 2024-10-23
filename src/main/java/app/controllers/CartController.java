@@ -40,7 +40,7 @@ public class CartController {
 
         } catch (DatabaseException e) {
             ctx.attribute("message", "Failed to add item to cart.");
-            ctx.render("/shopping.html");
+            ctx.render("/shopping");
         }
     }
 
@@ -53,12 +53,12 @@ public class CartController {
             ctx.sessionAttribute("bases", bases);
             ctx.sessionAttribute("toppings", toppings);
 
-            ctx.render("shopping.html");
+            ctx.render("/shopping");
 
         } catch (DatabaseException e) {
 
             ctx.attribute("message", "Failed to load item available flavors");
-            ctx.render("/shopping.html");
+            ctx.render("/shopping");
         }
     }
 
