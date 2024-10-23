@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Bruger</title>
+    <link href="../public/css/StyleRegister.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/stylebanner.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<div id="page-container">
+    <div id="page-content">
+
+        <h1>Fourthingsplus</h1>
+        <p>Indtast venligst brugerinfo:</p>
+
+        <div class="centered-form">
+
+            <form method="post">
+                <input type="text" name="username" placeholder="username"/><br/><br>
+                <input type="password" name="password1" placeholder="password"/><br/><br>
+                <input type="password" name="password2" placeholder="gentag password"/><br/><br>
+                <button type="submit" formaction="/register">Opret bruger</button>
+                <p class="errormessage" th:text="${#ctx.message}"></p>
+            </form>
+        </div>
+        <a href="/">Hop til forsiden</a>
+    </div>
+</div>
 
 </body>
 </html>

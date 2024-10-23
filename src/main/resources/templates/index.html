@@ -4,28 +4,38 @@
     <title>Frontpage</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/StyleRegister.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/stylebanner.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 
 <body>
+<header>
+    <img src="../public/images/cupcakebillede.png"  th:src="@{../public/images/cupcakebillede.png}">
+</header>
 
 <div id="page-container">
     <div id="page-content">
 
-        <h1>Fourthingsplus</h1>
+        <h1>Velkommen</h1>
 
-        <div class="centered-form">
+        <div class="register-box">
+            <form id="registerForm">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required placeholder="Indtast din e-mail">
+                <br>
+                <br>
 
-            <form method="post">
-                <input type="text" name="username" placeholder="username"/><br/><br>
-                <input type="password" name="password" placeholder="password"/><br/><br>
-                <button type="submit" formaction="/login">Log på</button>
-                <p class="errormessage" th:text="${#ctx.message}"></p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Indtast dit kodeord">
+
+                <button type="button" onclick="login()">Login</button>
             </form>
         </div>
-        <a href="/createuser">Create account</a>
+<br>
+        <a href="register.html">Create account</a>
     </div>
 </div>
+
 
 </body>
 </html>

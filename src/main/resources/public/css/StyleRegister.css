@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fff;
+}
+
+.header {
+    background-color: #4A0C6B;
+    color: white;
+    padding: 20px;
+}
+
+.header img {
+    max-height: 120px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header h1 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.register-box {
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+    display: inline-block;
+    text-align: left;
+    background-color: #F5F5F5;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+img{
+<img src="cupcakebillede.png" alt="Logo">
+}
