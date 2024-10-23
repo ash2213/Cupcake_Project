@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h2>Your Cart</h2>
+<div class="container">
+    <h2>Your Cart</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Base</th>
+            <th>Topping</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="orderLine : ${cart}">
+            <tr>
+                <td th:text="${orderLine.base.baseFlavor}"></td>
+                <td th:text="${orderLine.topping.toppingFlavor}"></td>
+                <td th:text="${orderLine.quantity}"></td>
+                <td th:text="${orderLine.price}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 
+    <h3>Total Price: <span th:text="${totalPrice}"></span> DKK</h3>
+
+    <a href="/checkout" class="checkout-button">Proceed to Checkout</a>
+</div>
 </body>
 </html>

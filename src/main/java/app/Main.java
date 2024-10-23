@@ -3,6 +3,7 @@ package app;
 import app.config.ThymeleafConfig;
 import app.controllers.CustomerController;
 import app.persistence.ConnectionPool;
+import app.controllers.CartController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -28,6 +29,9 @@ public class Main {
         app.post("/login", ctx -> CustomerController.login(ctx, connectionPool));
         app.get("/register",ctx -> ctx.render("register.html"));
         app.post("/register",ctx -> CustomerController.createUser(ctx,connectionPool));
+        app.get("/shopping", ctx -> CartController.showItemSelection(ctx, connectionPool));
+        app.post("/shopping", ctx -> CartController.addItemToCart(ctx, connectionPool));
+        app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));
 
     }
 }
