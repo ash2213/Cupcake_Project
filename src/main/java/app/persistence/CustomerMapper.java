@@ -37,7 +37,7 @@ public class CustomerMapper {
 
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into \"customers\" (email, password) values (?, ?)";
+        String sql = "insert into customers (email, password) values (?, ?)";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {

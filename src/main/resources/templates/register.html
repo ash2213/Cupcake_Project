@@ -8,55 +8,25 @@
     <link href="../public/css/stylebanner.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<div id="page-container">
+    <div id="page-content">
 
+        <h1>Fourthingsplus</h1>
+        <p>Indtast venligst brugerinfo:</p>
 
-<header>
-    <img src="../public/images/cupcakebillede.png"  th:src="@{../public/images/cupcakebillede.png}">
-</header>
-<h1>Venligst indtast email og password</h1>
-<div class="register-box">
-    <form id="registerForm" action="index.html">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" required placeholder="Indtast din e-mail">
+        <div class="centered-form">
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required placeholder="Indtast dit kodeord">
-
-        <button type="button" onclick="registerUser()">Register</button>
-    </form>
+            <form method="post">
+                <input type="text" name="username" placeholder="username"/><br/><br>
+                <input type="password" name="password1" placeholder="password"/><br/><br>
+                <input type="password" name="password2" placeholder="gentag password"/><br/><br>
+                <button type="submit" formaction="/register">Opret bruger</button>
+                <p class="errormessage" th:text="${#ctx.message}"></p>
+            </form>
+        </div>
+        <a href="/">Hop til forsiden</a>
+    </div>
 </div>
-
-<script>
-    // Function to register user
-    function registerUser() {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        // Simple validation
-        if (email === "" || password === "") {
-            alert("Venligst udfyld alle felter");
-            return;
-        }
-
-        // Simulate saving user data to Local Storage (acting like a simple database)
-        const users = JSON.parse(localStorage.getItem("users")) || [];
-
-        // Check if email already exists
-        const userExists = users.some(user => user.email === email);
-
-        if (userExists) {
-            alert("Denne e-mail er allerede registreret!");
-        } else {
-            // Save user
-            users.push({ email, password });
-            localStorage.setItem("users", JSON.stringify(users));
-            alert("Bruger oprettet succesfuldt!");
-
-            // Clear form
-            document.getElementById("registerForm").reset();
-        }
-    }
-</script>
 
 </body>
 </html>
