@@ -10,7 +10,7 @@ public class CustomerController {
 
     public static void login(Context ctx, ConnectionPool connectionPool) {
 
-        String name = ctx.formParam("username");
+        String name = ctx.formParam("email");
         String password = ctx.formParam("password");
         try {
             Customer customer = CustomerMapper.login(name, password, connectionPool);

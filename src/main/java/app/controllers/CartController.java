@@ -50,8 +50,8 @@ public class CartController {
             List<Base> bases = BaseMapper.getAllBases(connectionPool);
             List<Topping> toppings = ToppingMapper.getAllToppings(connectionPool);
 
-            ctx.sessionAttribute("bases", bases);
-            ctx.sessionAttribute("toppings", toppings);
+            ctx.attribute("bases", bases);
+            ctx.attribute("toppings", toppings);
 
             ctx.render("shopping.html");
 
@@ -76,7 +76,8 @@ public class CartController {
         }
 
         ctx.sessionAttribute("cart", cart);
-        ctx.sessionAttribute("totalPrice", totalPrice);
+        ctx.attribute("cart", cart);
+        ctx.attribute("totalPrice", totalPrice);
 
         ctx.render("cart.html");
     }
