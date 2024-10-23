@@ -2,9 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Bruger</title>
+    <link href="../public/css/StyleRegister.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/stylebanner.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
+
+
+<header>
+    <img src="../public/images/cupcakebillede.png"  th:src="@{../public/images/cupcakebillede.png}">
+</header>
+<h1>Venligst indtast email og password</h1>
+<div class="register-box">
+    <form id="registerForm" action="index.html">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required placeholder="Indtast din e-mail">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="Indtast dit kodeord">
+
+        <button type="button" onclick="registerUser()">Register</button>
+    </form>
+</div>
+
+<script>
+    // Function to register user
+    function registerUser() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simple validation
+        if (email === "" || password === "") {
+            alert("Venligst udfyld alle felter");
+            return;
+        }
+
+        // Simulate saving user data to Local Storage (acting like a simple database)
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if email already exists
+        const userExists = users.some(user => user.email === email);
+
+        if (userExists) {
+            alert("Denne e-mail er allerede registreret!");
+        } else {
+            // Save user
+            users.push({ email, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("Bruger oprettet succesfuldt!");
+
+            // Clear form
+            document.getElementById("registerForm").reset();
+        }
+    }
+</script>
 
 </body>
 </html>
