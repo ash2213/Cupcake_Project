@@ -17,10 +17,10 @@
         <div class="centered-form">
 
             <form method="post">
-                <input type="text" name="username" placeholder="username"/><br/><br>
+                <input type="email" name="email" placeholder="email"/><br/><br>
                 <input type="password" name="password1" placeholder="password"/><br/><br>
                 <input type="password" name="password2" placeholder="gentag password"/><br/><br>
-                <button type="submit" formaction="/register">Opret bruger</button>
+                <button type="submit" formaction="/register ">Opret bruger</button>
                 <p class="errormessage" th:text="${#ctx.message}"></p>
             </form>
         </div>

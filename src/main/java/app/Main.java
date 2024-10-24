@@ -32,6 +32,7 @@ public class Main {
         app.get("/shopping", ctx -> CartController.showItemSelection(ctx, connectionPool));
         app.post("/shopping", ctx -> CartController.addItemToCart(ctx, connectionPool));
         app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));
+        app.get("/adminOrderList", ctx -> ctx.render("adminOrderList.html"));
 
     }
 }

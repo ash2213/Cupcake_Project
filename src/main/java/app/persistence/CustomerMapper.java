@@ -19,9 +19,10 @@ public class CustomerMapper {
 
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    boolean isAdmin = rs.getBoolean("is_admin");
                     int id = rs.getInt("customer_id");
                     int balance = rs.getInt("balance");
-                    return new Customer(id,email,password,balance);
+                    return new Customer(id,email,password,balance,isAdmin);
                 } else {
                     throw new DatabaseException("Fejl i login. Prøv igen");
                 }
@@ -51,9 +52,9 @@ public class CustomerMapper {
             }
 
         } catch (SQLException e) {
-            String msg = "Fejl ved oprettelse af bruger";
+            String msg = "Error creating user";
             if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
-                msg = "Brugernavnet findes allerede. Vælg et andet";
+                msg = "User already exists";
             }
             throw new DatabaseException(msg);
         }

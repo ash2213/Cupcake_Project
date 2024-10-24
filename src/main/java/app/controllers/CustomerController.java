@@ -14,8 +14,16 @@ public class CustomerController {
         String password = ctx.formParam("password");
         try {
             Customer customer = CustomerMapper.login(name, password, connectionPool);
-            ctx.sessionAttribute("currentUser", customer);
-            ctx.redirect("/shopping");
+
+            if(customer.isAdmin()){
+                ctx.sessionAttribute("currentUser", customer);
+                ctx.redirect("adminOrderList.html");
+            }
+            else {
+
+                ctx.sessionAttribute("currentUser", customer);
+                ctx.redirect("/shopping");
+            }
 
         } catch (DatabaseException e) {
 
@@ -28,7 +36,7 @@ public class CustomerController {
 
     public static void createCustomer(Context ctx, ConnectionPool connectionPool) {
 
-        String email = ctx.formParam("username");
+        String email = ctx.formParam("email");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
 
