@@ -1,4 +1,5 @@
 package app.controllers;
+
 import app.entities.Customer;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -47,15 +48,13 @@ public class CustomerController {
                 ctx.render("register.html");
 
             }
-        }else{
+        } else {
             ctx.attribute("message", "Passwords do not match");
             ctx.render("register.html");
         }
 
 
     }
-
-
 
 
 }
