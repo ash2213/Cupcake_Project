@@ -9,33 +9,29 @@ import java.sql.SQLException;
 public class CustomerMapper {
 
     public static Customer login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from \"customers\" where email = ? and password = ?";
+        String sql = "select * from customers where email = ? and password = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
 
-
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    boolean isAdmin = rs.getBoolean("is_admin");
                     int id = rs.getInt("customer_id");
                     int balance = rs.getInt("balance");
-                    return new Customer(id,email,password,balance,isAdmin);
+                    boolean isAdmin = rs.getBoolean("is_admin");
+
+                    // Create and return the Customer object
+                    return new Customer(id, email, password, balance, isAdmin);
                 } else {
-                    throw new DatabaseException("Fejl i login. Prøv igen");
+                    throw new DatabaseException("Login failed. Please try again.");
                 }
             }
-
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException(e.getMessage());
         }
-
-
     }
-
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into customers (email, password) values (?, ?)";

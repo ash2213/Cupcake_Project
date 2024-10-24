@@ -10,30 +10,31 @@ import io.javalin.http.Context;
 public class CustomerController {
 
     public static void login(Context ctx, ConnectionPool connectionPool) {
-
-        String name = ctx.formParam("email");
+        String email = ctx.formParam("email");
         String password = ctx.formParam("password");
+
         try {
-            Customer customer = CustomerMapper.login(name, password, connectionPool);
+            Customer customer = CustomerMapper.login(email, password, connectionPool);
 
-            if(customer.isAdmin()){
-                ctx.sessionAttribute("currentUser", customer);
+            // Store the logged-in user in session
+            ctx.sessionAttribute("currentUser", customer);
+
+            // Store the user's email in the session so it can be displayed on other pages
+            ctx.sessionAttribute("userEmail", customer.getEmail());
+
+            // Redirect based on user role (admin or regular customer)
+            if (customer.isAdmin()) {
                 ctx.redirect("adminOrderList.html");
-            }
-            else {
-
-                ctx.sessionAttribute("currentUser", customer);
+            } else {
                 ctx.redirect("/shopping");
             }
 
         } catch (DatabaseException e) {
-
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
-
-
     }
+
 
     public static void createCustomer(Context ctx, ConnectionPool connectionPool) {
 

@@ -9,11 +9,18 @@
 <body>
 <header>
     <img alt="header" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+    <!-- New div to show the logged-in email -->
 </header>
+
+<div class="header-email">
+    <!-- Use Thymeleaf or Javalin to display the logged-in user's email -->
+
+</div>
 
     <nav>
         <ul>
             <li><a href="#">Ordrer</a></li>
+            <li th:text="${userEmail}" class="email-display">user@example.com</li>
         </ul>
     </nav>
 

@@ -13,5 +13,6 @@ public class ThymeleafConfig {
         templateResolver.setSuffix(".html");
         templateEngine.setTemplateResolver(templateResolver);
         return templateEngine;
+
     }
 }

@@ -50,17 +50,21 @@ public class CartController {
 
     public static void showItemSelection(Context ctx, ConnectionPool connectionPool) {
         try {
-
+            // Fetch available cupcake bases and toppings
             List<Base> bases = BaseMapper.getAllBases(connectionPool);
             List<Topping> toppings = ToppingMapper.getAllToppings(connectionPool);
 
+            // Fetch logged-in user's email from the session
+            String userEmail = ctx.sessionAttribute("userEmail");
+
+            // Pass the bases, toppings, and userEmail to the template
             ctx.attribute("bases", bases);
             ctx.attribute("toppings", toppings);
+            ctx.attribute("userEmail", userEmail);  // Pass the email to the HTML template
 
             ctx.render("shopping.html");
 
         } catch (DatabaseException e) {
-
             ctx.attribute("message", "Failed to load item available flavors");
             ctx.render("shopping.html");
         }
@@ -84,5 +88,6 @@ public class CartController {
         ctx.attribute("totalPrice", totalPrice);
 
         ctx.render("cart.html");
+
     }
 }
