@@ -1,23 +1,20 @@
 
-/* Reset default margin and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Main container */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
 
-/* Logo Image Styling */
 .logo-img {
-    width: 80%; /* Adjust this value to make the image smaller or larger */
+    width: 80%;
     display: block;
-    margin-left: auto; /* Center the image horizontally */
+    margin-left: auto;
     margin-right: auto;
     justify-content: center;
     background-color: rebeccapurple;
@@ -61,7 +58,6 @@ nav ul li a {
     color: #333;
 }
 
-/* Main content styling */
 .main-container {
     padding: 40px 20px;
     text-align: center;
@@ -122,5 +118,5 @@ img{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%; /* Optional: Adjust width as per your requirement */
+    width: 50%;
 }

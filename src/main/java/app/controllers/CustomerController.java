@@ -15,13 +15,10 @@ public class CustomerController {
         try {
             Customer customer = CustomerMapper.login(email, password, connectionPool);
 
-            // Store the logged-in user in session
             ctx.sessionAttribute("currentUser", customer);
 
-            // Store the user's email in the session so it can be displayed on other pages
             ctx.sessionAttribute("userEmail", customer.getEmail());
 
-            // Redirect based on user role (admin or regular customer)
             if (customer.isAdmin()) {
                 ctx.redirect("adminOrderList.html");
             }
@@ -46,8 +43,6 @@ public class CustomerController {
         String email = ctx.formParam("email");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
-
-        //validering af passwords -  at de to matcher
 
         if (password1.equals(password2)) {
 

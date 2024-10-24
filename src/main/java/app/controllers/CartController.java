@@ -100,7 +100,6 @@ public class CartController {
         public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
             try {
 
-
                 List<OrderLine> cart = ctx.sessionAttribute("cart");
                 ctx.attribute("cart", cart);
 

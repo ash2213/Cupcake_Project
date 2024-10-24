@@ -49,7 +49,6 @@ td {
     color: #666;
 }
 
-/* Total Price Styles */
 h3 {
     text-align: right;
     font-size: 1.5rem;
@@ -57,10 +56,9 @@ h3 {
 }
 
 h3 span {
-    color: #28a745; /* Green for the price */
+    color: #28a745;
 }
 
-/* Checkout Button Styles */
 .checkout-button {
     display: inline-block;
     background-color: #28a745;
@@ -83,10 +81,9 @@ img{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%; /* Optional: Adjust width as per your requirement */
+    width: 50%;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 768px) {
     th, td {
         padding: 10px;
