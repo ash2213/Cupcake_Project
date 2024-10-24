@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="../public/css/styleCart.css" th:href="@{/css/styleCart.css}" rel="stylesheet"/>
+    <link href="../public/css/styleBanner.css" th:href="@{/css/styleBanner.css}" rel="stylesheet"/>
 </head>
 <body>
+<header>
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+    <!-- New div to show the logged-in email -->
+</header>
 <div class="container">
     <h2>Your Cart</h2>
+
     <table>
         <thead>
         <tr>
             <th>Base</th>
             <th>Topping</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price (DKK)</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +36,10 @@
     </table>
 
     <h3>Total Price: <span th:text="${totalPrice}"></span> DKK</h3>
-    <a href="/checkout" class="checkout-button">Proceed to Checkout</a>
+
+    <div style="text-align: right;">
+        <a href="/checkout" class="checkout-button">Proceed to Checkout</a>
+    </div>
 </div>
 </body>
 </html>

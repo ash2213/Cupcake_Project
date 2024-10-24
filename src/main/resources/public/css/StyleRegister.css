@@ -53,7 +53,13 @@ button:hover {
     background-color: #555;
 }
 img{
-    text-align: center;
+
 <img src="cupcakebillede.png" alt="Logo">
 
+}
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Optional: Adjust width as per your requirement */
 }
