@@ -1,10 +1,12 @@
 package app.controllers;
 
 import app.entities.Base;
+import app.entities.Order;
 import app.entities.OrderLine;
 import app.entities.Topping;
 import app.exceptions.DatabaseException;
 import app.persistence.BaseMapper;
+import app.persistence.OrderLineMapper;
 import app.persistence.ToppingMapper;
 import io.javalin.http.Context;
 
@@ -28,12 +30,14 @@ public class CartController {
 
             OrderLine orderLine = new OrderLine(base, topping, quantity, price);
 
+            OrderLineMapper.createOrderLine(orderLine, connectionPool);
+
             List<OrderLine> cart = ctx.sessionAttribute("cart");
             if (cart == null) {
                 cart = new ArrayList<>();
             }
-            cart.add(orderLine);
 
+            cart.add(orderLine);
             ctx.sessionAttribute("cart", cart);
 
             ctx.redirect("/cart");
