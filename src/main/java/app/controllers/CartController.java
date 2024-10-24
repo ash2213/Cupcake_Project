@@ -97,17 +97,35 @@ public class CartController {
 
     }
 
-        public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
-            try {
+    public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
 
-                List<OrderLine> cart = ctx.sessionAttribute("cart");
-                ctx.attribute("cart", cart);
+        int customer_id = ctx.sessionAttribute("customer_id");
 
-                ctx.render("checkout.html");
-            } catch (Exception e) {
-                ctx.attribute("message", "Failed to load the checkout page.");
-                ctx.render("cart.html");
+
+        try {
+
+            List<OrderLine> cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
+
+            if (cart == null || cart.isEmpty()) {
+                ctx.attribute("message", "Your cart is empty. Please add items before checking out.");
+                ctx.render("shopping.html");
+                return;
             }
+
+            double totalPrice = 0;
+            for (OrderLine orderLine : cart) {
+                totalPrice += orderLine.getPrice();
+            }
+
+
+            ctx.attribute("cart", cart);
+            ctx.attribute("totalPrice", totalPrice);
+            ctx.render("checkout.html");
+
+        } catch (Exception e) {
+            ctx.attribute("message", "Failed to load the checkout page.");
+            ctx.render("cart.html");
         }
     }
+}
 
