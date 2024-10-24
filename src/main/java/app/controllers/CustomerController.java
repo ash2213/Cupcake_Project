@@ -12,7 +12,6 @@ public class CustomerController {
     public static void login(Context ctx, ConnectionPool connectionPool) {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
-
         try {
             Customer customer = CustomerMapper.login(email, password, connectionPool);
 
@@ -25,16 +24,22 @@ public class CustomerController {
             // Redirect based on user role (admin or regular customer)
             if (customer.isAdmin()) {
                 ctx.redirect("adminOrderList.html");
-            } else {
+            }
+            else {
+
+                ctx.sessionAttribute("currentUser", customer);
+                ctx.sessionAttribute("customer_id", customer.getCustomer_id());
                 ctx.redirect("/shopping");
             }
 
         } catch (DatabaseException e) {
+
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
-    }
 
+
+    }
 
     public static void createCustomer(Context ctx, ConnectionPool connectionPool) {
 

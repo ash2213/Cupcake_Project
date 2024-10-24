@@ -16,22 +16,26 @@ public class CustomerMapper {
                 ps.setString(1, email);
                 ps.setString(2, password);
 
+
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    boolean isAdmin = rs.getBoolean("is_admin");
                     int id = rs.getInt("customer_id");
                     int balance = rs.getInt("balance");
-                    boolean isAdmin = rs.getBoolean("is_admin");
-
-                    // Create and return the Customer object
-                    return new Customer(id, email, password, balance, isAdmin);
+                    return new Customer(id,email,password,balance,isAdmin);
                 } else {
-                    throw new DatabaseException("Login failed. Please try again.");
+                    throw new DatabaseException("Error in login. Try again");
                 }
             }
+
+
         } catch (SQLException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new RuntimeException(e);
         }
+
+
     }
+
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into customers (email, password) values (?, ?)";
@@ -42,7 +46,7 @@ public class CustomerMapper {
                 ps.setString(2, password);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("Fejl ved oprettelse af bruger");
+                    throw new DatabaseException("Error creating user");
                 }
 
             }

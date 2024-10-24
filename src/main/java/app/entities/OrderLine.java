@@ -6,12 +6,18 @@ public class OrderLine {
     private Topping topping;
     private int quantity;
     private double price;
+    private int customer_id;
 
-    public OrderLine(Base base, Topping topping, int quantity, double price) {
+    public OrderLine(Base base, Topping topping, int quantity, double price, int customer_id) {
         this.base = base;
         this.topping = topping;
         this.quantity = quantity;
         this.price = price;
+        this.customer_id = customer_id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
     }
 
     public Base getBase() {

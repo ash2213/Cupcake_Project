@@ -1,14 +1,12 @@
 package app.controllers;
 
-import app.entities.Base;
-import app.entities.Order;
-import app.entities.OrderLine;
-import app.entities.Topping;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.BaseMapper;
 import app.persistence.OrderLineMapper;
 import app.persistence.ToppingMapper;
 import io.javalin.http.Context;
+import app.persistence.OrderLineMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,8 @@ public class CartController {
     public static void addItemToCart(Context ctx, ConnectionPool connectionPool) {
 
         try {
+            int customerId = ctx.sessionAttribute("customer_id");
+
             int baseId = Integer.parseInt(ctx.formParam("base_id"));
             int toppingId = Integer.parseInt(ctx.formParam("topping_id"));
             int quantity = Integer.parseInt(ctx.formParam("quantity"));
@@ -28,9 +28,9 @@ public class CartController {
 
             double price = (base.getPrice() + topping.getPrice()) * quantity;
 
-            OrderLine orderLine = new OrderLine(base, topping, quantity, price);
+            OrderLine orderLine = new OrderLine(base, topping, quantity, price, customerId);
 
-            OrderLineMapper.createOrderLine(orderLine, connectionPool);
+            OrderLineMapper.createOrderLine(orderLine, customerId, connectionPool);
 
             List<OrderLine> cart = ctx.sessionAttribute("cart");
             if (cart == null) {
@@ -50,17 +50,15 @@ public class CartController {
 
     public static void showItemSelection(Context ctx, ConnectionPool connectionPool) {
         try {
-            // Fetch available cupcake bases and toppings
             List<Base> bases = BaseMapper.getAllBases(connectionPool);
             List<Topping> toppings = ToppingMapper.getAllToppings(connectionPool);
 
-            // Fetch logged-in user's email from the session
+
             String userEmail = ctx.sessionAttribute("userEmail");
 
-            // Pass the bases, toppings, and userEmail to the template
             ctx.attribute("bases", bases);
             ctx.attribute("toppings", toppings);
-            ctx.attribute("userEmail", userEmail);  // Pass the email to the HTML template
+            ctx.attribute("userEmail", userEmail);
 
             ctx.render("shopping.html");
 
@@ -72,37 +70,44 @@ public class CartController {
 
     public static void showCart(Context ctx, ConnectionPool connectionPool) {
 
-        List<OrderLine> cart = ctx.sessionAttribute("cart");
+        int customer_id = ctx.sessionAttribute("customer_id");
 
-        if (cart == null) {
-            cart = new ArrayList<>();
+        List<OrderLine> cart = null;
+        try {
+
+            if (cart == null) {
+                cart = new ArrayList<>();
+            }
+
+            cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
+
+            double totalPrice = 0;
+            for (OrderLine orderLine : cart) {
+                totalPrice += orderLine.getPrice();
+            }
+
+            ctx.attribute("cart", cart);
+            ctx.attribute("totalPrice", totalPrice);
+
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Failed to load cart");
         }
-
-        double totalPrice = 0;
-        for (OrderLine orderLine : cart) {
-            totalPrice += orderLine.getPrice();
-        }
-
-        ctx.sessionAttribute("cart", cart);
-        ctx.attribute("cart", cart);
-        ctx.attribute("totalPrice", totalPrice);
 
         ctx.render("cart.html");
 
     }
 
-        // Existing code for Cart and adding items...
-
         public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
             try {
-                // You can fetch the current cart, customer details, etc., if needed.
+
+
                 List<OrderLine> cart = ctx.sessionAttribute("cart");
                 ctx.attribute("cart", cart);
-                // Render the checkout page
+
                 ctx.render("checkout.html");
             } catch (Exception e) {
                 ctx.attribute("message", "Failed to load the checkout page.");
-                ctx.render("cart.html");  // Fall back to cart if error occurs
+                ctx.render("cart.html");
             }
         }
     }

@@ -24,7 +24,7 @@ public class Main {
             config.staticFiles.add("/public");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
             config.staticFiles.add("/templates");
-        }).start(7171);
+        }).start(7070);
 
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
