@@ -7,6 +7,8 @@ import app.controllers.CartController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
+import static io.javalin.util.FileUtil.readFile;
+
 public class Main {
 
     private static final String USER = "postgres";
@@ -22,7 +24,7 @@ public class Main {
             config.staticFiles.add("/public");
             config.fileRenderer(new JavalinThymeleaf(ThymeleafConfig.templateEngine()));
             config.staticFiles.add("/templates");
-        }).start(7070);
+        }).start(7171);
 
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
@@ -35,4 +37,5 @@ public class Main {
         app.get("/adminOrderList", ctx -> ctx.render("adminOrderList.html"));
 
     }
+
 }
