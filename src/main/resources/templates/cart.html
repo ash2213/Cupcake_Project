@@ -10,6 +10,15 @@
 <header>
     <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
 </header>
+<nav>
+    <ul>
+        <li><a href="#">Your orders</a></li>
+        <li th:text="${userEmail}" class="email-display">user@example.com</li>
+        <li class="left">
+        </li>
+        <li><a href="/" method="post" class="logout">Logout</a></li>
+    </ul>
+</nav>
 <div class="container">
     <h2>Your Cart</h2>
 

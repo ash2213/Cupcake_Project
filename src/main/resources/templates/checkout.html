@@ -6,12 +6,24 @@
     <title>Checkout</title>
     <link href="../public/css/styleShopping.css" th:href="@{/css/styleShopping.css}" rel="stylesheet"/>
     <link href="../public/css/styleCheckout.css" th:href="@{/css/styleCheckout.css}" rel="stylesheet"/>
+    <link href="../public/css/styleBanner.css" th:href="@{/css/styleBanner.css}" rel="stylesheet"/>
 
 </head>
 <body>
 <header>
     <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
 </header>
+
+<nav>
+    <ul>
+        <li><a href="#">Checkout</a></li>
+        <li th:text="${userEmail}" class="email-display">user@example.com</li>
+        <li class="left">
+        </li>
+        <li><a href="/" method="post" class="logout">Logout</a></li>
+    </ul>
+</nav>
+
 <div class="container">
     <h1>Checkout</h1>
 
