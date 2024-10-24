@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Billing Details Styles */
+.billing-details, .order-summary {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.billing-details h2, .order-summary h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.billing-details form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.billing-details form input,
+.billing-details form select,
+.billing-details form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+.billing-details form textarea {
+    height: 100px;
+}
+
+/* Order Summary Styles */
+.order-summary {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-summary table th, .order-summary table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-summary table th {
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.order-summary table td {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Total Price */
+.total {
+    text-align: right;
+    font-size: 1.5rem;
+    color: #28a745;
+    margin-top: 20px;
+}
+
+/* Payment Section */
+.payment-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.payment-section button {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.payment-section button:hover {
+    background-color: #218838;
+}
+
+
+img{
+"cupcakebillede.png" alt="Logo">
+}
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Optional: Adjust width as per your requirement */
+}
+
+
+/* Responsive Design */
+@media screen and (min-width: 768px) {
+    .billing-details, .order-summary {
+        width: 48%;
+    }
+}

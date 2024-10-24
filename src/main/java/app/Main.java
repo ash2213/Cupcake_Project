@@ -35,6 +35,8 @@ public class Main {
         app.post("/shopping", ctx -> CartController.addItemToCart(ctx, connectionPool));
         app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));
         app.get("/adminOrderList", ctx -> ctx.render("adminOrderList.html"));
+        //new added from z
+        app.get("/checkout", ctx -> CartController.showCheckoutPage(ctx, connectionPool));
 
     }
 

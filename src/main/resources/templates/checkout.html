@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="../public/css/styleShopping.css" th:href="@{/css/styleShopping.css}" rel="stylesheet"/>
+    <link href="../public/css/styleCheckout.css" th:href="@{/css/styleCheckout.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<header>
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+    <!-- New div to show the logged-in email -->
+</header>
+<div class="container">
+    <h1>Checkout</h1>
+
+    <div class="checkout-container">
+        <!-- Billing Details -->
+        <div class="billing-details">
+            <h2>Billing Details</h2>
+            <form>
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="postalcode">Postal Code</label>
+                <input type="text" id="postalcode" name="postalcode" required>
+
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Norway">Norway</option>
+                    <option value="United States">United States</option>
+                </select>
+
+                <label for="notes">Order Notes (Optional)</label>
+                <textarea id="notes" name="notes"></textarea>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price (DKK)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="orderLine : ${cart}">
+                    <tr>
+                        <td th:text="${orderLine.base.baseFlavor} + ${orderLine.topping.toppingFlavor}"></td>
+                        <td th:text="${orderLine.quantity}"></td>
+                        <td th:text="${orderLine.price}"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+
+            <div class="total">
+                Total: <span th:text="${totalPrice}"></span> DKK
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Button -->
+    <div class="payment-section">
+        <button type="submit">Place Order</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -90,4 +90,20 @@ public class CartController {
         ctx.render("cart.html");
 
     }
-}
+
+        // Existing code for Cart and adding items...
+
+        public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
+            try {
+                // You can fetch the current cart, customer details, etc., if needed.
+                List<OrderLine> cart = ctx.sessionAttribute("cart");
+                ctx.attribute("cart", cart);
+                // Render the checkout page
+                ctx.render("checkout.html");
+            } catch (Exception e) {
+                ctx.attribute("message", "Failed to load the checkout page.");
+                ctx.render("cart.html");  // Fall back to cart if error occurs
+            }
+        }
+    }
+
