@@ -37,6 +37,8 @@ public class Main {
         app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));
         app.get("/adminOrderList", ctx -> ctx.render("adminOrderList.html"));
         app.get("/checkout", ctx -> CartController.showCheckoutPage(ctx, connectionPool));
+        app.post("/logout", ctx -> CustomerController.logout(ctx, connectionPool));
+
 
     }
 

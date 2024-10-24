@@ -65,5 +65,16 @@ public class CustomerController {
 
     }
 
+    public static void logout(Context ctx, ConnectionPool connectionPool) {
+
+        ctx.sessionAttribute("currentUser", null);
+        ctx.sessionAttribute("customer_id", null);
+
+        ctx.redirect("/");
+    }
+
+
+
+
 
 }
