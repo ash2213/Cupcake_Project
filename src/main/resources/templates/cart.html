@@ -29,6 +29,13 @@
                 <td th:text="${orderLine.topping.toppingFlavor}"></td>
                 <td th:text="${orderLine.quantity}"></td>
                 <td th:text="${orderLine.price}"></td>
+                <td>Order Line ID: <span th:text="${orderLine.order_line_id}"></span></td>
+                <td>
+                    <form th:action="@{/removeOrder}" method="post">
+                        <input type="hidden" name="order_line_id" th:value="${orderLine.order_line_id}" />
+                        <button type="submit">🗑️</button>
+                    </form>
+                </td>
             </tr>
         </th:block>
         </tbody>

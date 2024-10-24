@@ -127,5 +127,20 @@ public class CartController {
             ctx.render("cart.html");
         }
     }
+
+    public static void removeOrderLine(Context ctx, ConnectionPool connectionPool) {
+
+        try {
+
+            int orderLineId = Integer.parseInt(ctx.formParam("order_line_id"));
+
+            OrderLineMapper.deleteOrderLine(orderLineId, connectionPool);
+
+            ctx.redirect("/cart");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Failed to remove item from cart");
+            ctx.render("cart.html");
+        }
+    }
 }
 

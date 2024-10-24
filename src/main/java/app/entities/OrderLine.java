@@ -2,6 +2,7 @@ package app.entities;
 
 public class OrderLine {
 
+    private int order_line_id;
     private Base base;
     private Topping topping;
     private int quantity;
@@ -14,6 +15,19 @@ public class OrderLine {
         this.quantity = quantity;
         this.price = price;
         this.customer_id = customer_id;
+    }
+
+    public OrderLine(int order_line_id, Base base, Topping topping, int quantity, double price, int customer_id) {
+        this.order_line_id = order_line_id;
+        this.base = base;
+        this.topping = topping;
+        this.quantity = quantity;
+        this.price = price;
+        this.customer_id = customer_id;
+    }
+
+    public int getOrder_line_id() {
+        return order_line_id;
     }
 
     public int getCustomer_id() {
@@ -52,4 +66,7 @@ public class OrderLine {
         this.price = price;
     }
 
+    public void setOrder_line_id(int order_line_id) {
+        this.order_line_id = order_line_id;
+    }
 }

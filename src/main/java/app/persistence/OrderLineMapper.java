@@ -48,6 +48,7 @@ public class OrderLineMapper {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
+                    int order_line_id = rs.getInt("order_line_id");
                     int base_id = rs.getInt("base_id");
                     int topping_id = rs.getInt("topping_id");
                     int quantity = rs.getInt("quantity");
@@ -57,7 +58,7 @@ public class OrderLineMapper {
                     Base base = BaseMapper.getBaseById(base_id, connectionPool);
                     Topping topping = ToppingMapper.getToppingById(topping_id, connectionPool);
 
-                    OrderLine orderLine = new OrderLine(base, topping, quantity, price, customer_id);
+                    OrderLine orderLine = new OrderLine(order_line_id, base, topping, quantity, price, customer_id);
                     orderLines.add(orderLine);
 
 
@@ -67,7 +68,24 @@ public class OrderLineMapper {
             throw new DatabaseException("Failed to retrieve order lines for customer with ID");
         }
         return orderLines;
-
-
     }
+
+    public static void deleteOrderLine(int order_line_id, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "DELETE FROM order_line WHERE order_line_id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, order_line_id);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new DatabaseException("Order line with ID " + order_line_id + " not found.");
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Could not delete order line with ID " + order_line_id);
+        }
+    }
+
 }
