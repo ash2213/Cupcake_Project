@@ -7,8 +7,6 @@ import app.controllers.CartController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
-import static io.javalin.util.FileUtil.readFile;
-
 public class Main {
 
     private static final String USER = "postgres";
