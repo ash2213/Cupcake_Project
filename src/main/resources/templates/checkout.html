@@ -27,6 +27,8 @@
 <div class="container">
     <h1>Checkout</h1>
 
+    <form th:action="@{/placeOrder}" method="post">
+
     <div class="checkout-container">
         <div class="billing-details">
             <h2>Billing Details</h2>
@@ -91,6 +93,7 @@
     <div class="payment-section">
         <button type="submit">Place Order</button>
     </div>
+        </form>
 </div>
 
 </body>
