@@ -1,6 +1,7 @@
 package app.entities;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
     private int orderId;
@@ -8,6 +9,7 @@ public class Order {
     private double totalPrice;
     private String status;
     private Timestamp orderDate;
+    private List<OrderLine> orderLines;
 
 
     public Order(int customerId, double totalPrice, String status, Timestamp orderDate) {
@@ -63,5 +65,11 @@ public class Order {
 
     public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
+    }
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 }

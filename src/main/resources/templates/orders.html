@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Your Orders</h1>
+
+    <div th:if="${orders.empty}">
+        <p>No orders found.</p>
+    </div>
+
+    <div th:each="order : ${orders}">
+        <h2>Order ID: <span th:text="${order.orderId}"></span></h2>
+        <p>Date: <span th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+        <p>Total Price: <span th:text="${order.totalPrice}"></span> DKK</p>
+
+        <h3>Items:</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Base</th>
+                <th>Topping</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="line : ${order.orderLines}">
+                <td th:text="${line.base.baseFlavor}"></td>
+                <td th:text="${line.topping.toppingFlavor}"></td>
+                <td th:text="${line.quantity}"></td>
+                <td th:text="${line.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

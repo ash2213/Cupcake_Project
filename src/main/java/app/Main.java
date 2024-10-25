@@ -2,6 +2,7 @@ package app;
 
 import app.config.ThymeleafConfig;
 import app.controllers.CustomerController;
+import app.controllers.OrderController;
 import app.persistence.ConnectionPool;
 import app.controllers.CartController;
 import io.javalin.Javalin;
@@ -35,8 +36,11 @@ public class Main {
         app.get("/cart", ctx -> CartController.showCart(ctx, connectionPool));
         app.get("/adminOrderList", ctx -> ctx.render("adminOrderList.html"));
         app.get("/checkout", ctx -> CartController.showCheckoutPage(ctx, connectionPool));
+        app.post("/checkout", ctx -> CartController.processCheckout(ctx, connectionPool));
         app.post("/logout", ctx -> CustomerController.logout(ctx, connectionPool));
         app.post("/removeOrder", ctx -> CartController.removeOrderLine(ctx, connectionPool));
+        app.get("/orders", ctx -> OrderController.showOrders(ctx, connectionPool));
+
 
     }
 

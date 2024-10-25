@@ -23,7 +23,7 @@ public class OrderLineMapper {
                 ps.setInt(2, orderLine.getTopping().getToppingId());
                 ps.setInt(3, orderLine.getQuantity());
                 ps.setDouble(4, orderLine.getPrice());
-                ps.setInt(5,orderLine.getCustomer_id());
+                ps.setInt(5, orderLine.getCustomer_id());
 
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
@@ -38,9 +38,9 @@ public class OrderLineMapper {
 
     public static List<OrderLine> getOrderLine(int customer_id, ConnectionPool connectionPool) throws DatabaseException {
 
-        List<OrderLine> orderLines= new ArrayList<>();
+        List<OrderLine> orderLines = new ArrayList<>();
 
-        String sql = "SELECT * FROM order_line WHERE customer_id = ?";
+        String sql = "SELECT * FROM order_line WHERE customer_id = ? AND order_id IS NULL";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -60,7 +60,6 @@ public class OrderLineMapper {
 
                     OrderLine orderLine = new OrderLine(order_line_id, base, topping, quantity, price, customer_id);
                     orderLines.add(orderLine);
-
 
                 }
             }
@@ -88,4 +87,46 @@ public class OrderLineMapper {
         }
     }
 
+    public static void updateCartWithOrderId(int customerId, int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE order_line SET order_id = ? WHERE customer_id = ? AND order_id IS NULL";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            ps.setInt(2, customerId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException("Failed to update order lines: " + e.getMessage());
+        }
+    }
+
+    public static List<OrderLine> getOrderLinesByOrderId(int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        List<OrderLine> orderLines = new ArrayList<>();
+        String sql = "SELECT * FROM order_line WHERE order_id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int order_line_id = rs.getInt("order_line_id");
+                int base_id = rs.getInt("base_id");
+                int topping_id = rs.getInt("topping_id");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                int customer_id = rs.getInt("customer_id");
+                int order_id = rs.getInt("order_id");
+
+                Base base = BaseMapper.getBaseById(base_id, connectionPool);
+                Topping topping = ToppingMapper.getToppingById(topping_id, connectionPool);
+
+                OrderLine orderLine = new OrderLine(order_line_id, base, topping, quantity, price, customer_id, order_id);
+                orderLines.add(orderLine);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Failed to retrieve order lines for order ID " + orderId);
+        }
+        return orderLines;
+    }
 }
+

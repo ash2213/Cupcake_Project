@@ -2,16 +2,12 @@ package app.controllers;
 
 import app.entities.*;
 import app.exceptions.DatabaseException;
-import app.persistence.BaseMapper;
-import app.persistence.OrderLineMapper;
-import app.persistence.ToppingMapper;
+import app.persistence.*;
 import io.javalin.http.Context;
 import app.persistence.OrderLineMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import app.persistence.ConnectionPool;
 
 public class CartController {
     public static void addItemToCart(Context ctx, ConnectionPool connectionPool) {
@@ -101,7 +97,6 @@ public class CartController {
 
         int customer_id = ctx.sessionAttribute("customer_id");
 
-
         try {
 
             List<OrderLine> cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
@@ -140,6 +135,35 @@ public class CartController {
         } catch (DatabaseException e) {
             ctx.attribute("message", "Failed to remove item from cart");
             ctx.render("cart.html");
+        }
+    }
+
+    public static void processCheckout(Context ctx, ConnectionPool connectionPool) {
+        int customerId = ctx.sessionAttribute("customer_id");
+
+        try {
+            List<OrderLine> cartItems = OrderLineMapper.getOrderLine(customerId, connectionPool);
+            if (cartItems == null || cartItems.isEmpty()) {
+                ctx.attribute("message", "Your cart is empty.");
+                ctx.render("cart.html");
+                return;
+            }
+
+            double totalPrice = 0;
+            for (OrderLine item : cartItems) {
+                totalPrice += item.getPrice();
+            }
+
+            int orderId = OrderMapper.createOrder(customerId, totalPrice, connectionPool);
+
+            OrderLineMapper.updateCartWithOrderId(customerId, orderId, connectionPool);
+
+            ctx.attribute("message", "Order placed successfully!");
+            ctx.redirect("/orders");
+
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Failed to complete checkout: " + e.getMessage());
+            ctx.render("checkout.html");
         }
     }
 }

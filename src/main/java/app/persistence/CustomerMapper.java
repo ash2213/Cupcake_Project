@@ -16,7 +16,6 @@ public class CustomerMapper {
                 ps.setString(1, email);
                 ps.setString(2, password);
 
-
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     boolean isAdmin = rs.getBoolean("is_admin");
@@ -27,15 +26,10 @@ public class CustomerMapper {
                     throw new DatabaseException("Error in login. Try again");
                 }
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into customers (email, password, balance) values (?, ?, ?)";
@@ -49,18 +43,13 @@ public class CustomerMapper {
                 if (rowsAffected != 1) {
                     throw new DatabaseException("Error creating user");
                 }
-
             }
-
         } catch (SQLException e) {
             String msg = "Error creating user";
             if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
-                msg = "User already exists";
+                msg = "E-mail already exists";
             }
             throw new DatabaseException(msg);
         }
     }
-
-
-
 }

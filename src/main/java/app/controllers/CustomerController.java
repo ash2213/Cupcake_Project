@@ -72,9 +72,4 @@ public class CustomerController {
 
         ctx.redirect("/");
     }
-
-
-
-
-
 }

@@ -90,8 +90,12 @@
         </div>
     </div>
 
-    <div class="payment-section">
+    <form th:action="@{/checkout}" method="post">
+        <input type="hidden" name="totalPrice" th:value="${totalPrice}"/>
         <button type="submit">Place Order</button>
+    </form>
+    <div th:if="${message}" class="error-message">
+        <p th:text="${message}"></p>
     </div>
         </form>
 </div>
