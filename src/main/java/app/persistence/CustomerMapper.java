@@ -38,12 +38,13 @@ public class CustomerMapper {
 
 
     public static void createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into customers (email, password) values (?, ?)";
+        String sql = "insert into customers (email, password, balance) values (?, ?, ?)";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
+                ps.setInt(3,500);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
                     throw new DatabaseException("Error creating user");
