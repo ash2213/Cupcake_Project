@@ -21,8 +21,7 @@ public class CustomerController {
 
             if (customer.isAdmin()) {
                 ctx.redirect("adminOrderList.html");
-            }
-            else {
+            } else {
 
                 ctx.sessionAttribute("currentUser", customer);
                 ctx.sessionAttribute("customer_id", customer.getCustomer_id());
@@ -52,17 +51,13 @@ public class CustomerController {
                 ctx.attribute("message", "You have successfully created a new customer");
                 ctx.render("index.html");
             } catch (DatabaseException e) {
-
                 ctx.attribute("message", e.getMessage());
                 ctx.render("register.html");
-
             }
         } else {
             ctx.attribute("message", "Passwords do not match");
             ctx.render("register.html");
         }
-
-
     }
 
     public static void logout(Context ctx, ConnectionPool connectionPool) {

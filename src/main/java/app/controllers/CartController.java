@@ -123,21 +123,6 @@ public class CartController {
         }
     }
 
-    public static void removeOrderLine(Context ctx, ConnectionPool connectionPool) {
-
-        try {
-
-            int orderLineId = Integer.parseInt(ctx.formParam("order_line_id"));
-
-            OrderLineMapper.deleteOrderLine(orderLineId, connectionPool);
-
-            ctx.redirect("/cart");
-        } catch (DatabaseException e) {
-            ctx.attribute("message", "Failed to remove item from cart");
-            ctx.render("cart.html");
-        }
-    }
-
     public static void processCheckout(Context ctx, ConnectionPool connectionPool) {
         int customerId = ctx.sessionAttribute("customer_id");
 
@@ -154,9 +139,18 @@ public class CartController {
                 totalPrice += item.getPrice();
             }
 
+            double customerBalance = CustomerMapper.getBalance(customerId, connectionPool);
+            if (customerBalance < totalPrice) {
+                ctx.attribute("message", "You do not have enough money in your balance.");
+                ctx.render("checkout.html");
+                return;
+            }
+
             int orderId = OrderMapper.createOrder(customerId, totalPrice, connectionPool);
 
             OrderLineMapper.updateCartWithOrderId(customerId, orderId, connectionPool);
+
+            CustomerMapper.updateCustomerBalance(customerId, customerBalance - totalPrice, connectionPool);
 
             ctx.attribute("message", "Order placed successfully!");
             ctx.redirect("/orders");
@@ -164,6 +158,21 @@ public class CartController {
         } catch (DatabaseException e) {
             ctx.attribute("message", "Failed to complete checkout: " + e.getMessage());
             ctx.render("checkout.html");
+        }
+    }
+
+    public static void removeOrderLine(Context ctx, ConnectionPool connectionPool) {
+
+        try {
+
+            int orderLineId = Integer.parseInt(ctx.formParam("order_line_id"));
+
+            OrderLineMapper.deleteOrderLine(orderLineId, connectionPool);
+
+            ctx.redirect("/cart");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Failed to remove item from cart");
+            ctx.render("cart.html");
         }
     }
 }
