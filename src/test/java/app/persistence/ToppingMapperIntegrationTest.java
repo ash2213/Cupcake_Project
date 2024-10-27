@@ -69,7 +69,7 @@ public class ToppingMapperIntegrationTest {
 
     @Test
     public void testGetToppingByIdNonExistent() throws DatabaseException {
-        int nonExistentId = 9999; // Assuming this ID does not exist in the database
+        int nonExistentId = 9999;
         Topping topping = ToppingMapper.getToppingById(nonExistentId, connectionPool);
         assertNull(topping, "Topping should be null when retrieving with non-existent ID");
     }
