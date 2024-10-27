@@ -8,7 +8,8 @@
 </head>
 <body>
 <header>
-    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png"
+         th:src="@{/images/cupcakebillede.png}">
 </header>
 <nav>
     <ul>
@@ -40,7 +41,7 @@
                 <td th:text="${orderLine.price}"></td>
                 <td>
                     <form th:action="@{/removeOrder}" method="post">
-                        <input type="hidden" name="order_line_id" th:value="${orderLine.order_line_id}" />
+                        <input type="hidden" name="order_line_id" th:value="${orderLine.order_line_id}"/>
                         <button type="submit">🗑️</button>
                     </form>
                 </td>

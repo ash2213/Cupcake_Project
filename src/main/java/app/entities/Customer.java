@@ -20,16 +20,8 @@ public class Customer {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     public int getCustomer_id() {
         return customer_id;
-    }
-
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
     }
 
     public String getEmail() {
@@ -47,24 +39,4 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customer_id=" + customer_id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
-
 }

@@ -1,10 +1,8 @@
 package app.persistence;
-
 import app.entities.Base;
 import app.entities.OrderLine;
 import app.entities.Topping;
 import app.exceptions.DatabaseException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +33,6 @@ public class OrderLineMapper {
         }
     }
 
-
     public static List<OrderLine> getOrderLine(int customer_id, ConnectionPool connectionPool) throws DatabaseException {
 
         List<OrderLine> orderLines = new ArrayList<>();
@@ -60,7 +57,6 @@ public class OrderLineMapper {
 
                     OrderLine orderLine = new OrderLine(order_line_id, base, topping, quantity, price, customer_id);
                     orderLines.add(orderLine);
-
                 }
             }
         } catch (SQLException exception) {
@@ -81,7 +77,6 @@ public class OrderLineMapper {
             if (rowsAffected == 0) {
                 throw new DatabaseException("Order line with ID " + order_line_id + " not found.");
             }
-
         } catch (SQLException e) {
             throw new DatabaseException("Could not delete order line with ID " + order_line_id);
         }
@@ -129,4 +124,3 @@ public class OrderLineMapper {
         return orderLines;
     }
 }
-

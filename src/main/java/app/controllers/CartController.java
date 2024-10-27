@@ -1,11 +1,9 @@
 package app.controllers;
-
 import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.*;
 import io.javalin.http.Context;
 import app.persistence.OrderLineMapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +21,7 @@ public class CartController {
             Topping topping = ToppingMapper.getToppingById(toppingId, connectionPool);
 
             double price = (base.getPrice() + topping.getPrice()) * quantity;
-
             OrderLine orderLine = new OrderLine(base, topping, quantity, price, customerId);
-
             OrderLineMapper.createOrderLine(orderLine, customerId, connectionPool);
 
             List<OrderLine> cart = ctx.sessionAttribute("cart");
@@ -35,7 +31,6 @@ public class CartController {
 
             cart.add(orderLine);
             ctx.sessionAttribute("cart", cart);
-
             ctx.redirect("/cart");
 
         } catch (DatabaseException e) {
@@ -49,13 +44,11 @@ public class CartController {
             List<Base> bases = BaseMapper.getAllBases(connectionPool);
             List<Topping> toppings = ToppingMapper.getAllToppings(connectionPool);
 
-
             String userEmail = ctx.sessionAttribute("userEmail");
 
             ctx.attribute("bases", bases);
             ctx.attribute("toppings", toppings);
             ctx.attribute("userEmail", userEmail);
-
             ctx.render("shopping.html");
 
         } catch (DatabaseException e) {
@@ -70,35 +63,28 @@ public class CartController {
 
         List<OrderLine> cart = null;
         try {
-
             if (cart == null) {
                 cart = new ArrayList<>();
             }
-
             cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
 
             double totalPrice = 0;
             for (OrderLine orderLine : cart) {
                 totalPrice += orderLine.getPrice();
             }
-
             ctx.attribute("cart", cart);
             ctx.attribute("totalPrice", totalPrice);
 
         } catch (DatabaseException e) {
             ctx.attribute("message", "Failed to load cart");
         }
-
         ctx.render("cart.html");
-
     }
 
     public static void showCheckoutPage(Context ctx, ConnectionPool connectionPool) {
-
         int customer_id = ctx.sessionAttribute("customer_id");
 
         try {
-
             List<OrderLine> cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
 
             if (cart == null || cart.isEmpty()) {
@@ -106,13 +92,10 @@ public class CartController {
                 ctx.render("shopping.html");
                 return;
             }
-
             double totalPrice = 0;
             for (OrderLine orderLine : cart) {
                 totalPrice += orderLine.getPrice();
             }
-
-
             ctx.attribute("cart", cart);
             ctx.attribute("totalPrice", totalPrice);
             ctx.render("checkout.html");
@@ -133,23 +116,19 @@ public class CartController {
                 ctx.render("cart.html");
                 return;
             }
-
             double totalPrice = 0;
             for (OrderLine item : cartItems) {
                 totalPrice += item.getPrice();
             }
-
             double customerBalance = CustomerMapper.getBalance(customerId, connectionPool);
             if (customerBalance < totalPrice) {
                 ctx.attribute("message", "You do not have enough money in your balance.");
                 ctx.render("checkout.html");
                 return;
             }
-
             int orderId = OrderMapper.createOrder(customerId, totalPrice, connectionPool);
 
             OrderLineMapper.updateCartWithOrderId(customerId, orderId, connectionPool);
-
             CustomerMapper.updateCustomerBalance(customerId, customerBalance - totalPrice, connectionPool);
 
             ctx.attribute("message", "Order placed successfully!");
@@ -164,9 +143,7 @@ public class CartController {
     public static void removeOrderLine(Context ctx, ConnectionPool connectionPool) {
 
         try {
-
             int orderLineId = Integer.parseInt(ctx.formParam("order_line_id"));
-
             OrderLineMapper.deleteOrderLine(orderLineId, connectionPool);
 
             ctx.redirect("/cart");
@@ -176,4 +153,3 @@ public class CartController {
         }
     }
 }
-

@@ -37,14 +37,6 @@ public class OrderLine {
         this.order_id = order_id;
     }
 
-    public int getOrder_line_id() {
-        return order_line_id;
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
     public int getCustomer_id() {
         return customer_id;
     }
@@ -73,19 +65,7 @@ public class OrderLine {
         this.topping = topping;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setOrder_line_id(int order_line_id) {
-        this.order_line_id = order_line_id;
-    }
-
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
     }
 }

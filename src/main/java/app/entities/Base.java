@@ -24,14 +24,6 @@ public class Base {
         return price;
     }
 
-    public void setBaseId(int baseId) {
-        this.baseId = baseId;
-    }
-
-    public void setBaseFlavor(String baseFlavor) {
-        this.baseFlavor = baseFlavor;
-    }
-
     public void setPrice(double price) {
         this.price = price;
     }

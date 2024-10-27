@@ -1,5 +1,4 @@
 package app.persistence;
-
 import app.entities.Topping;
 import app.exceptions.DatabaseException;
 import java.sql.Connection;
@@ -56,4 +55,3 @@ public class ToppingMapper {
         return topping;
     }
 }
-

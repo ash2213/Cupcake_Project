@@ -1,8 +1,6 @@
 package app.persistence;
-
 import app.entities.Customer;
 import app.exceptions.DatabaseException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +51,6 @@ public class CustomerMapper {
             }
             throw new DatabaseException(msg);
         }
-
     }
 
     public static double getBalance(int customer_id, ConnectionPool connectionPool) throws DatabaseException {
@@ -91,6 +88,4 @@ public class CustomerMapper {
             throw new DatabaseException("Failed to update customer balance: " + e.getMessage());
         }
     }
-
 }
-

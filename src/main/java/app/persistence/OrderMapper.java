@@ -1,11 +1,8 @@
 package app.persistence;
 
-import app.entities.Base;
 import app.entities.Order;
 import app.entities.OrderLine;
-import app.entities.Topping;
 import app.exceptions.DatabaseException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +17,7 @@ public class OrderMapper {
 
         String checkCustomerSql = "SELECT COUNT(*) FROM customers WHERE customer_id = ?";
 
-        String sql = "INSERT INTO orders (customer_id, total_price, status, order_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP) RETURNING order_id";
-
+        String sql = "INSERT INTO orders (customer_id, total_price, status, order_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (Connection connection = connectionPool.getConnection()) {
 
@@ -56,6 +52,7 @@ public class OrderMapper {
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
+
             ps.setInt(1, customerId);
             ResultSet rs = ps.executeQuery();
 

@@ -16,7 +16,7 @@ public class CustomerMapperIntegrationTest {
     private ConnectionPool connectionPool;
     private String testEmail = "test@example.com";
     private String testPassword = "password123";
-    private int balance= 500;
+    private int balance = 500;
 
     @BeforeAll
     public void setUp() throws SQLException {

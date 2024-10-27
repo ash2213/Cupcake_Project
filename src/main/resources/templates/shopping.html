@@ -8,7 +8,8 @@
 </head>
 <body>
 <header>
-    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png"
+         th:src="@{/images/cupcakebillede.png}">
 </header>
 
 <div class="header-email">
@@ -21,7 +22,8 @@
         <li th:text="${userEmail}" class="email-display">user@example.com</li>
         <li class="left">
             <a href="/cart" class="cart-button">
-                <img alt="cart_logo" class="cart-logo" src="../public/images/bag.png" th:src="@{/images/bag.png}" width="20" height="20">
+                <img alt="cart_logo" class="cart-logo" src="../public/images/cart.png" th:src="@{/images/cart.png}"
+                     width="20" height="20">
             </a>
         </li>
         <li><a href="/" method="post" class="logout">Logout</a></li>
@@ -48,7 +50,8 @@
                 <br>
                 <select name="topping_id" id="topping">
                     <option value="" disabled selected>Vælg topping</option>
-                    <option th:each="topping : ${toppings}" th:value="${topping.toppingId}" th:text="${topping.toppingFlavor}"></option>
+                    <option th:each="topping : ${toppings}" th:value="${topping.toppingId}"
+                            th:text="${topping.toppingFlavor}"></option>
                 </select>
             </div>
 
