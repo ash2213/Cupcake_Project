@@ -13,8 +13,26 @@ import java.util.List;
 public class OrderMapper {
 
     public static int createOrder(int customerId, double totalPrice, ConnectionPool connectionPool) throws DatabaseException {
+
+        if (customerId <= 0) {
+            throw new DatabaseException("Failed to create order: Invalid customer ID.");
+        }
+
+        String checkCustomerSql = "SELECT COUNT(*) FROM customers WHERE customer_id = ?";
+
         String sql = "INSERT INTO orders (customer_id, total_price, status, order_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP) RETURNING order_id";
+
+
         try (Connection connection = connectionPool.getConnection()) {
+
+            try (PreparedStatement checkPs = connection.prepareStatement(checkCustomerSql)) {
+                checkPs.setInt(1, customerId);
+                ResultSet checkRs = checkPs.executeQuery();
+                if (checkRs.next() && checkRs.getInt(1) == 0) {
+                    throw new DatabaseException("Failed to create order: Customer does not exist.");
+                }
+            }
+
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, customerId);
                 ps.setDouble(2, totalPrice);
