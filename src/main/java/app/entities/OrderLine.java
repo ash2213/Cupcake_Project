@@ -68,4 +68,8 @@ public class OrderLine {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public int getOrder_line_id() {
+        return order_line_id;
+    }
 }
