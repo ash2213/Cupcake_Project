@@ -2,29 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Your Orders</title>
+    <link href="../public/css/styleOrders.css" th:href="@{/css/styleOrders.css}" rel="stylesheet"/>
+    <link href="../public/css/styleBanner.css" th:href="@{/css/styleBanner.css}" rel="stylesheet"/>
 </head>
 <body>
+<header>
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/shopping">Shop</a></li>
+        <li th:text="${userEmail}" class="email-display">user@example.com</li>
+        <li><a href="/logout" class="logout">Logout</a></li>
+    </ul>
+</nav>
+
 <div class="container">
     <h1>Your Orders</h1>
 
-    <div th:if="${orders.empty}">
+    <div th:if="${orders.empty}" class="no-orders">
         <p>No orders found.</p>
     </div>
 
-    <div th:each="order : ${orders}">
+    <div th:each="order : ${orders}" class="order-summary">
         <h2>Order ID: <span th:text="${order.orderId}"></span></h2>
         <p>Date: <span th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>
         <p>Total Price: <span th:text="${order.totalPrice}"></span> DKK</p>
 
         <h3>Items:</h3>
-        <table>
+        <table class="order-table">
             <thead>
             <tr>
                 <th>Base</th>
                 <th>Topping</th>
                 <th>Quantity</th>
-                <th>Price</th>
+                <th>Price (DKK)</th>
             </tr>
             </thead>
             <tbody>

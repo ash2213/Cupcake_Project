@@ -28,7 +28,7 @@
 <div class="container">
     <h1>Checkout</h1>
 
-    <form th:action="@{/placeOrder}" method="post">
+    <form  th:action="@{/placeOrder}" method="post">
         <div class="checkout-container">
             <div class="billing-details">
                 <h2>Billing Details</h2>
@@ -92,7 +92,7 @@
 
         <form th:action="@{/checkout}" method="post">
             <input type="hidden" name="totalPrice" th:value="${totalPrice}"/>
-            <button type="submit">Place Order</button>
+            <button class=".placeOrder" type="submit">Place Order</button>
         </form>
         <div th:if="${message}" class="error-message">
             <p th:text="${message}"></p>

@@ -7,6 +7,10 @@ h1 {
 }
 .login-box{
    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 
 }
 .centered-form{
@@ -14,8 +18,6 @@ h1 {
 }
 
 #page-container {
-
-    border: 1px solid red;
     display: flex;
     justify-content: center;
 }
