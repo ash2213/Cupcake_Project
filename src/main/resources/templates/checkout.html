@@ -92,7 +92,7 @@
 
         <form th:action="@{/checkout}" method="post">
             <input type="hidden" name="totalPrice" th:value="${totalPrice}"/>
-            <button class=".placeOrder" type="submit">Place Order</button>
+            <button class=".placeOrder" type="submit">Place Orders</button>
         </form>
         <div th:if="${message}" class="error-message">
             <p th:text="${message}"></p>
