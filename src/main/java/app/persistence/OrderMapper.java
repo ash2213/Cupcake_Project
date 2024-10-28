@@ -17,7 +17,7 @@ public class OrderMapper {
 
         String checkCustomerSql = "SELECT COUNT(*) FROM customers WHERE customer_id = ?";
 
-        String sql = "INSERT INTO orders (customer_id, total_price, status, order_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO orders (customer_id, total_price, status, order_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP) RETURNING order_id";
 
         try (Connection connection = connectionPool.getConnection()) {
 
