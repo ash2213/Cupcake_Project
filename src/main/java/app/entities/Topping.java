@@ -27,4 +27,12 @@ public class Topping {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public void setToppingId(int toppingId) {
+        this.toppingId = toppingId;
+    }
+
+    public void setToppingFlavor(String toppingFlavor) {
+        this.toppingFlavor = toppingFlavor;
+    }
 }

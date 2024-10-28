@@ -42,7 +42,35 @@ public class Order {
         return orderLines;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
     public void setOrderLines(List<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
     }
 }

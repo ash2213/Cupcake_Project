@@ -57,6 +57,30 @@ public class OrderLine {
         return price;
     }
 
+    public int getOrder_line_id() {
+        return order_line_id;
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_line_id(int order_line_id) {
+        this.order_line_id = order_line_id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
     public void setBase(Base base) {
         this.base = base;
     }
@@ -67,9 +91,5 @@ public class OrderLine {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getOrder_line_id() {
-        return order_line_id;
     }
 }

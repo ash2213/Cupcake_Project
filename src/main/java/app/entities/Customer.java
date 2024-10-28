@@ -28,6 +28,10 @@ public class Customer {
         return email;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -38,5 +42,17 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
