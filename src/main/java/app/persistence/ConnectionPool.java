@@ -1,4 +1,6 @@
 package app.persistence;
+import app.entities.Base;
+import app.entities.Order;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.util.logging.Logger;
 /***
  * Singleton pattern applied to handling a Hikari ConnectionPool
  */
-public class ConnectionPool {
+public class ConnectionPool{
 
     public static ConnectionPool instance = null;
     public static HikariDataSource ds = null;

@@ -1,6 +1,6 @@
 package app.entities;
 
-public class Base {
+public class Base{
 
     private int baseId;
     private String baseFlavor;

@@ -2,7 +2,7 @@ package app.entities;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class Order {
+public class Order{
     private int orderId;
     private int customerId;
     private double totalPrice;

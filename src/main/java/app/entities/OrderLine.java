@@ -1,6 +1,6 @@
 package app.entities;
 
-public class OrderLine {
+public class OrderLine{
 
     private int order_line_id;
     private Base base;
