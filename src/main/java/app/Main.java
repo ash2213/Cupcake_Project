@@ -37,5 +37,6 @@ public class Main {
         app.post("/logout", ctx -> CustomerController.logout(ctx, connectionPool));
         app.post("/removeOrder", ctx -> CartController.removeOrderLine(ctx, connectionPool));
         app.get("/orders", ctx -> OrderController.showOrders(ctx, connectionPool));
+        app.get("/admin/orders", ctx -> OrderController.showAllOrdersWithDetails(ctx, connectionPool));
     }
 }

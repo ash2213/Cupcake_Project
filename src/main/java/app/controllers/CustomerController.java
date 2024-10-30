@@ -16,7 +16,7 @@ public class CustomerController {
             ctx.sessionAttribute("userEmail", customer.getEmail());
 
             if (customer.isAdmin()) {
-                ctx.redirect("adminOrderList.html");
+                ctx.redirect("/admin/orders");
             } else {
                 ctx.sessionAttribute("currentUser", customer);
                 ctx.sessionAttribute("customer_id", customer.getCustomer_id());

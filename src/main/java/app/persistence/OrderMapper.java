@@ -1,5 +1,6 @@
 package app.persistence;
 
+import app.entities.Customer;
 import app.entities.Order;
 import app.entities.OrderLine;
 import app.exceptions.DatabaseException;
@@ -71,6 +72,36 @@ public class OrderMapper {
             }
         } catch (SQLException e) {
             throw new DatabaseException("Failed to retrieve orders: " + e.getMessage());
+        }
+        return orders;
+    }
+
+    public static List<Order> getAllOrdersWithDetails(ConnectionPool connectionPool) throws DatabaseException {
+        List<Order> orders = new ArrayList<>();
+
+        String orderSql = "SELECT * FROM orders";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(orderSql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int orderId = rs.getInt("order_id");
+                int customerId = rs.getInt("customer_id");
+                double totalPrice = rs.getDouble("total_price");
+                String status = rs.getString("status");
+                Timestamp orderDate = rs.getTimestamp("order_date");
+
+                Order order = new Order(orderId, customerId, totalPrice, status, orderDate);
+
+                List<OrderLine> orderLines = OrderLineMapper.getOrderLinesByOrderId(orderId, connectionPool);
+                order.setOrderLines(orderLines);
+
+                orders.add(order);
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Could not retrieve all orders with details from the database");
         }
         return orders;
     }

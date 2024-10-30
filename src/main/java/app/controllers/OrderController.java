@@ -21,4 +21,19 @@ public class OrderController {
             ctx.render("orders.html");
         }
     }
+
+    public static void showAllOrdersWithDetails(Context ctx, ConnectionPool connectionPool) {
+        try {
+            List<Order> allOrders = OrderMapper.getAllOrdersWithDetails(connectionPool);
+
+            System.out.println("Retrieved Orders: " + allOrders);
+
+            ctx.attribute("orders", allOrders);
+            ctx.render("adminOrderList.html");
+
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Failed to load all orders: " + e.getMessage());
+            ctx.render("index.html");
+        }
+    }
 }
