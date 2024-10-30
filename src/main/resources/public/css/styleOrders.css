@@ -36,6 +36,16 @@ nav ul li {
     margin: 10px 30px 0 30px;
 }
 
+nav ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav ul li a:hover {
+    color: inherit;
+    cursor: default;
+}
+
 
 
 .container {
