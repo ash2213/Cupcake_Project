@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
+    <link href="../public/css/styleAdmin.css" th:href="@{/css/styleAdmin.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <img src="@{/images/cupcakebillede.png}">
+    <img alt="header" class="center-img" src="../public/images/cupcakebillede.png" th:src="@{/images/cupcakebillede.png}">
 </header>
 <nav>
     <ul>
@@ -20,11 +21,11 @@
 <div class="container">
     <h1>All Orders</h1>
 
-    <div th:if="${orders.empty}" class="no_orders">
+    <div th:if="${orders.empty}" class="no-orders">
         <p>No orders found.</p>
     </div>
 
-    <div th:each="order : ${orders}" class="order_summary">
+    <div th:each="order : ${orders}" class="order-summary">
         <h2>Order ID: <span th:text="${order.orderId}"></span></h2>
         <p>Date: <span th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></span></p>
         <p>Total Price: <span th:text="${order.totalPrice}"></span> DKK</p>
@@ -32,7 +33,7 @@
         <p>Customer ID: <span th:text="${order.customerId}"></span></p>
 
         <h3>Items:</h3>
-        <table class="order_table">
+        <table class="order-table">
             <thead>
             <tr>
                 <th>Base</th>
