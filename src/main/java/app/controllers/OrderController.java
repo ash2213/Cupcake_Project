@@ -28,11 +28,13 @@ public class OrderController {
 
     public static void showAllOrdersWithDetails(Context ctx, ConnectionPool connectionPool) {
         try {
+            String userEmail = ctx.sessionAttribute("userEmail");
             List<Order> allOrders = OrderMapper.getAllOrdersWithDetails(connectionPool);
 
             System.out.println("Retrieved Orders: " + allOrders);
 
             ctx.attribute("orders", allOrders);
+            ctx.attribute("userEmail", userEmail);
             ctx.render("adminOrderList.html");
 
         } catch (DatabaseException e) {
