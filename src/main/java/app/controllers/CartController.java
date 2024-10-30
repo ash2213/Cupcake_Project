@@ -91,7 +91,7 @@ public class CartController {
 
             if (cart == null || cart.isEmpty()) {
                 ctx.attribute("message", "Your cart is empty. Please add items before checking out.");
-                ctx.render("shopping.html");
+                ctx.redirect("/shopping");
                 return;
             }
             double totalPrice = 0;
