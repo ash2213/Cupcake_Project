@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opret Bruger</title>
-    <link href="../public/css/StyleRegister.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/StyleRegister.css" th:href="@{/css/StyleRegister.css}" rel="stylesheet"/>
     <link href="../public/css/styleBanner.css" th:href="@{/css/styleBanner.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -21,9 +21,9 @@
         <div class="centered-form">
 
             <form method="post">
-                <input type="email" name="email" placeholder="email"/><br/><br>
-                <input type="password" name="password1" placeholder="password"/><br/><br>
-                <input type="password" name="password2" placeholder="gentag password"/><br/><br>
+                <input type="email" name="email" placeholder="email" required/><br/><br>
+                <input type="password" name="password1" placeholder="password" required/><br/><br>
+                <input type="password" name="password2" placeholder="gentag password" required/><br/><br>
                 <button type="submit" formaction="/register ">Opret bruger</button>
 
                 <p class="errormessage" th:text="${#ctx.message}"></p>
