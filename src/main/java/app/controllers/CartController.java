@@ -60,7 +60,7 @@ public class CartController {
     public static void showCart(Context ctx, ConnectionPool connectionPool) {
 
         int customer_id = ctx.sessionAttribute("customer_id");
-
+        String userEmail = ctx.sessionAttribute("userEmail");
         List<OrderLine> cart = null;
         try {
             if (cart == null) {
@@ -74,6 +74,7 @@ public class CartController {
             }
             ctx.attribute("cart", cart);
             ctx.attribute("totalPrice", totalPrice);
+            ctx.attribute("userEmail", userEmail);
 
         } catch (DatabaseException e) {
             ctx.attribute("message", "Failed to load cart");
@@ -86,6 +87,7 @@ public class CartController {
 
         try {
             List<OrderLine> cart = OrderLineMapper.getOrderLine(customer_id, connectionPool);
+            String userEmail = ctx.sessionAttribute("userEmail");
 
             if (cart == null || cart.isEmpty()) {
                 ctx.attribute("message", "Your cart is empty. Please add items before checking out.");
@@ -98,6 +100,7 @@ public class CartController {
             }
             ctx.attribute("cart", cart);
             ctx.attribute("totalPrice", totalPrice);
+            ctx.attribute("userEmail", userEmail);
             ctx.render("checkout.html");
 
         } catch (Exception e) {
