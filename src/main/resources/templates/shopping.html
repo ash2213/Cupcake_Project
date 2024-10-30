@@ -39,7 +39,7 @@
             <div>
                 <label for="base">Vælg bund</label>
                 <br>
-                <select name="base_id" id="base">
+                <select name="base_id" id="base" required>
                     <option value="" disabled selected>Vælg bund</option>
                     <option th:each="base : ${bases}" th:value="${base.baseId}" th:text="${base.baseFlavor}"></option>
                 </select>
@@ -48,7 +48,7 @@
             <div>
                 <label for="topping">Vælg topping</label>
                 <br>
-                <select name="topping_id" id="topping">
+                <select name="topping_id" id="topping" required>
                     <option value="" disabled selected>Vælg topping</option>
                     <option th:each="topping : ${toppings}" th:value="${topping.toppingId}"
                             th:text="${topping.toppingFlavor}"></option>
