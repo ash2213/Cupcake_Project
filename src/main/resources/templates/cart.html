@@ -13,9 +13,13 @@
 </header>
 <nav>
     <ul>
-        <li><a href="#">Your orders</a></li>
+        <li><a href="/orders">Order</a></li>
         <li th:text="${userEmail}" class="email-display">user@example.com</li>
         <li class="left">
+            <a href="/cart" class="cart-button">
+                <img alt="cart_logo" class="cart-logo" src="../public/images/cart.png" th:src="@{/images/cart.png}"
+                     width="20" height="20">
+            </a>
         </li>
         <li><a href="/" method="post" class="logout">Logout</a></li>
     </ul>

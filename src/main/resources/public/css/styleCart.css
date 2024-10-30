@@ -131,3 +131,10 @@ img{
         padding: 10px 15px;
     }
 }
+.header-email {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 1rem;
+    color: #333;
+}
