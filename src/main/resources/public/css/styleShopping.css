@@ -134,3 +134,30 @@ img{
     margin-right: auto;
     width: 50%;
 }
+.checkout-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+
+@media screen and (max-width: 768px) {
+    th, td {
+        padding: 10px;
+    }
+
+    .checkout-button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+}
