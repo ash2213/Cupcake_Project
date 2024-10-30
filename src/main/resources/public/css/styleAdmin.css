@@ -8,13 +8,11 @@ body {
 
 
 .center-img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
     display: block;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
-
 
 nav {
     background-color: #f8f8f8;
@@ -36,6 +34,15 @@ nav ul li {
     margin: 10px 30px 0 30px;
 }
 
+nav ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav ul li a:hover {
+    color: inherit;
+    cursor: default;
+}
 
 
 .container {
@@ -101,3 +108,4 @@ h2, h3 {
 .left {
     margin-left: auto;
 }
+
